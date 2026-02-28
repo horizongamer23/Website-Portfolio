@@ -3,22 +3,22 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "David Miller",
+    name: "Rajesh Sharma",
     role: "Owner, The Heritage Inn",
     content: "Growth Grid Media transformed our outdated site into a booking machine. Their professional approach and attention to detail were outstanding.",
-    image: "https://i.pravatar.cc/150?u=david",
+    image: "https://picsum.photos/seed/indian-male-1/150/150",
   },
   {
-    name: "Elena Rodriguez",
+    name: "Amit Verma",
     role: "Founder, Saffron Bistro",
     content: "The new website has doubled our online reservations. It's beautiful, fast, and our customers love the mobile experience.",
-    image: "https://i.pravatar.cc/150?u=elena",
+    image: "https://picsum.photos/seed/indian-male-2/150/150",
   },
   {
-    name: "Marcus Thorne",
-    role: "Partner, Thorne Law",
+    name: "Vikram Singh",
+    role: "Partner, Singh & Associates",
     content: "We needed a site that communicated authority. Growth Grid delivered exactly that, and we've seen a significant uptick in leads.",
-    image: "https://i.pravatar.cc/150?u=marcus",
+    image: "https://picsum.photos/seed/indian-male-3/150/150",
   },
 ];
 
