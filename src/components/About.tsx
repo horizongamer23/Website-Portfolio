@@ -3,7 +3,7 @@ import { Shield, TrendingUp, Users } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-gray-50">
+    <section id="about" className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="flex-1">

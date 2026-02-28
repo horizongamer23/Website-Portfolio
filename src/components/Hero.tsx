@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle2, Globe, Layout, Zap } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <section className="relative pt-24 pb-12 lg:pt-32 lg:pb-16 overflow-hidden">
       {/* Background Accents */}
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[400px] h-[400px] bg-brand-accent/5 rounded-full blur-3xl" />

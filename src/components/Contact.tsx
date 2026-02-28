@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section id="contact" className="py-16 bg-white">
       <div className="container mx-auto px-6">
         <div className="bg-brand-dark rounded-[40px] overflow-hidden shadow-2xl flex flex-col lg:flex-row">
           {/* Contact Info */}

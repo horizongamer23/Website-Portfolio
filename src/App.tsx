@@ -23,8 +23,6 @@ export default function App() {
         <About />
         <Services />
         <Portfolio />
-        <ValueProposition />
-        <Process />
         <Testimonials />
         <Contact />
       </main>
