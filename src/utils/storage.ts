@@ -4,7 +4,7 @@ export const STORAGE_KEYS = {
   ABOUT: 'growth_grid_about',
   SERVICES: 'growth_grid_services',
   TESTIMONIALS: 'growth_grid_testimonials',
-  PORTFOLIO: 'growth_grid_portfolio',
+  PORTFOLIO: 'growth_grid_portfolio_v2',
   FAQ: 'growth_grid_faq',
 };
 

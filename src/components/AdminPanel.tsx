@@ -117,27 +117,27 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
   return (
     <div className="fixed inset-0 z-[100] bg-brand-dark/80 backdrop-blur-sm flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-5xl max-h-[90vh] rounded-[32px] shadow-2xl overflow-hidden flex flex-col">
-        <div className="p-6 border-b border-gray-100 flex items-center justify-between bg-gray-50">
-          <div className="flex items-center gap-4">
-            <h2 className="text-2xl font-bold text-brand-dark">Advanced Admin</h2>
-            <div className="flex bg-white p-1 rounded-xl border border-gray-200 overflow-x-auto max-w-[600px] no-scrollbar">
-              {(['general', 'hero', 'about', 'services', 'portfolio', 'testimonials', 'faq'] as Tab[]).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${activeTab === tab ? 'bg-brand-blue text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
-            </div>
+        <div className="p-4 md:p-6 border-b border-gray-100 flex flex-col gap-4 bg-gray-50">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl md:text-2xl font-bold text-brand-dark">Advanced Admin</h2>
+            <button onClick={handleClose} className="p-2 hover:bg-gray-200 rounded-full transition-all">
+              <X className="w-6 h-6 text-gray-500" />
+            </button>
           </div>
-          <button onClick={handleClose} className="p-2 hover:bg-gray-200 rounded-full transition-all">
-            <X className="w-6 h-6 text-gray-500" />
-          </button>
+          <div className="flex bg-white p-1 rounded-xl border border-gray-200 overflow-x-auto w-full no-scrollbar">
+            {(['general', 'hero', 'about', 'services', 'portfolio', 'testimonials', 'faq'] as Tab[]).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${activeTab === tab ? 'bg-brand-blue text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-8">
+        <div className="flex-1 overflow-y-auto p-4 md:p-8">
           {activeTab === 'general' && (
             <div className="space-y-8">
               <div className="grid md:grid-cols-2 gap-8">
@@ -379,7 +379,7 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
                       <div className="w-24 h-16 bg-gray-200 rounded-xl overflow-hidden border-2 border-white shadow-sm shrink-0">
                         <img src={p.image} className="w-full h-full object-cover" />
                       </div>
-                      <div className="flex-1 grid grid-cols-2 gap-4">
+                      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <input
                           value={p.title}
                           onChange={(e) => {
@@ -415,7 +415,7 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
                       className="w-full bg-white border border-gray-200 px-4 py-2 rounded-xl text-sm font-medium text-emerald-600"
                       placeholder="Result (e.g. 50% growth)"
                     />
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-2 rounded-xl">
                         <ImageIcon className="w-4 h-4 text-gray-400" />
                         <input
@@ -465,7 +465,7 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
                   <div key={i} className="bg-gray-50 p-6 rounded-2xl border border-gray-200 space-y-4">
                     <div className="flex items-center justify-between gap-4">
                       <img src={t.image} className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm" />
-                      <div className="flex-1 grid grid-cols-2 gap-4">
+                      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <input
                           value={t.name}
                           onChange={(e) => {
@@ -499,8 +499,8 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
                       className="w-full bg-white border border-gray-200 p-4 rounded-xl text-sm"
                       rows={2}
                     />
-                    <div className="flex items-center gap-6">
-                      <div className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-2 rounded-xl">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                      <div className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-2 rounded-xl w-full sm:w-auto">
                         <ImageIcon className="w-4 h-4 text-gray-400" />
                         <input
                           value={t.image}
@@ -509,7 +509,7 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
                             newT[i].image = e.target.value;
                             setTestimonials(newT);
                           }}
-                          className="flex-1 bg-transparent outline-none text-xs w-48"
+                          className="flex-1 bg-transparent outline-none text-xs w-full sm:w-48"
                         />
                       </div>
                       <div className="flex items-center gap-2">
@@ -578,13 +578,13 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
           )}
         </div>
 
-        <div className="p-6 border-t border-gray-100 bg-gray-50 flex justify-end gap-4">
-          <button onClick={handleClose} className="px-6 py-2.5 rounded-xl text-sm font-bold text-gray-500 hover:bg-gray-200 transition-all">
+        <div className="p-4 md:p-6 border-t border-gray-100 bg-gray-50 flex flex-col-reverse sm:flex-row justify-end gap-4">
+          <button onClick={handleClose} className="w-full sm:w-auto px-6 py-2.5 rounded-xl text-sm font-bold text-gray-500 hover:bg-gray-200 transition-all">
             Cancel
           </button>
           <button
             onClick={saveAll}
-            className="flex items-center gap-2 bg-brand-dark text-white px-8 py-2.5 rounded-xl text-sm font-bold hover:bg-brand-blue transition-all shadow-lg shadow-brand-dark/10"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-brand-dark text-white px-8 py-2.5 rounded-xl text-sm font-bold hover:bg-brand-blue transition-all shadow-lg shadow-brand-dark/10"
           >
             <Save className="w-4 h-4" /> Save All Changes
           </button>

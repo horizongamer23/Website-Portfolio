@@ -24,33 +24,26 @@ export const DEFAULT_TESTIMONIALS = [
 
 export const DEFAULT_PROJECTS = [
   {
-    title: "Hotel Haveli Inn Jodhpur",
+    title: "Jehari Vilas",
     category: "Hotel & Hospitality",
-    image: "https://picsum.photos/seed/haveli/800/600",
+    image: "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepGm3CXM_2ZiX0_7EPTwVQwE1P0rJbJPOhsMoyE9GEhKLDm1zXsuIm-shi5QJWGhrcwViZsiwPtT4v-4HQVlsJKOdcrW0ibXaaT75WnOjApGW8fPd-XpnLqOIBchYS3sl-TZV2IdAnTt-ax=s1340-w720-h1340-rw",
+    result: "Premium digital experience showcasing heritage and luxury.",
+    link: "#",
+  },
+  {
+    title: "Hotel Haveli Inn",
+    category: "Hotel & Hospitality",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSI3F4rG8TLmaPqlWkhgq4-pBXQ2NrKzaM6-JDuPJWMheSPYoOUUYSBJaU&s=10",
     result: "Modernized digital presence with a high-performing booking-focused website.",
     link: "https://hotelhaveliinnjodhpur.com",
   },
   {
-    title: "Saffron Bistro",
-    category: "Restaurant",
-    image: "https://picsum.photos/seed/restaurant/800/600",
-    result: "Doubled online reservation volume with a modern, visual menu design.",
+    title: "Luxury Resort & Spa",
+    category: "Hospitality",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRyIzwpLH-n0JmYh7BGl1aq85Vh3EC6MUIfpJIzcRiheG48sdpvhmxPFU&s=10",
+    result: "Elevated brand identity and increased direct bookings.",
     link: "#",
-  },
-  {
-    title: "Elite Law Group",
-    category: "Professional Services",
-    image: "https://picsum.photos/seed/law/800/600",
-    result: "Established authority and generated 20+ qualified leads in the first month.",
-    link: "#",
-  },
-  {
-    title: "Personal Portfolio",
-    category: "Personal Brand",
-    image: "https://picsum.photos/seed/portfolio/800/600",
-    result: "Created a premium portfolio that showcases high-end web development projects.",
-    link: "#",
-  },
+  }
 ];
 
 export const DEFAULT_GENERAL = {
