@@ -1,28 +1,22 @@
 import { motion } from "motion/react";
 import { Star, Quote } from "lucide-react";
-
-const testimonials = [
-  {
-    name: "Rajesh Sharma",
-    role: "Owner, The Heritage Inn",
-    content: "Growth Grid Media transformed our outdated site into a booking machine. Their professional approach and attention to detail were outstanding.",
-    image: "https://picsum.photos/seed/indian-male-1/150/150",
-  },
-  {
-    name: "Amit Verma",
-    role: "Founder, Saffron Bistro",
-    content: "The new website has doubled our online reservations. It's beautiful, fast, and our customers love the mobile experience.",
-    image: "https://picsum.photos/seed/indian-male-2/150/150",
-  },
-  {
-    name: "Vikram Singh",
-    role: "Partner, Singh & Associates",
-    content: "We needed a site that communicated authority. Growth Grid delivered exactly that, and we've seen a significant uptick in leads.",
-    image: "https://picsum.photos/seed/indian-male-3/150/150",
-  },
-];
+import { useState, useEffect } from "react";
+import { STORAGE_KEYS, getStoredData } from "../utils/storage";
+import { DEFAULT_TESTIMONIALS } from "../constants/siteDefaults";
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState(DEFAULT_TESTIMONIALS);
+
+  useEffect(() => {
+    const loadData = () => {
+      setTestimonials(getStoredData(STORAGE_KEYS.TESTIMONIALS, DEFAULT_TESTIMONIALS));
+    };
+
+    loadData();
+    window.addEventListener('storage_update', loadData);
+    return () => window.removeEventListener('storage_update', loadData);
+  }, []);
+
   return (
     <section id="testimonials" className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
@@ -39,7 +33,7 @@ export default function Testimonials() {
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
-              key={testimonial.name}
+              key={index}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -48,7 +42,7 @@ export default function Testimonials() {
             >
               <Quote className="absolute top-6 right-8 w-10 h-10 text-gray-100" />
               <div className="flex gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(testimonial.rating || 5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                 ))}
               </div>

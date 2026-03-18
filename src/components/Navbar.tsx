@@ -1,10 +1,36 @@
 import { motion } from "motion/react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { STORAGE_KEYS, getStoredData } from "../utils/storage";
+import { DEFAULT_GENERAL } from "../constants/siteDefaults";
 
-export default function Navbar() {
+interface NavbarProps {
+  onLogoClick: () => void;
+}
+
+export default function Navbar({ onLogoClick }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const [general, setGeneral] = useState(DEFAULT_GENERAL);
+
+  useEffect(() => {
+    const loadData = () => {
+      setGeneral(getStoredData(STORAGE_KEYS.GENERAL, DEFAULT_GENERAL));
+    };
+    loadData();
+    window.addEventListener('storage_update', loadData);
+    return () => window.removeEventListener('storage_update', loadData);
+  }, []);
+
+  useEffect(() => {
+    if (clickCount >= 5) {
+      onLogoClick();
+      setClickCount(0);
+    }
+    const timer = setTimeout(() => setClickCount(0), 2000);
+    return () => clearTimeout(timer);
+  }, [clickCount]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,8 +43,8 @@ export default function Navbar() {
   const navLinks = [
     { name: "Services", href: "#services" },
     { name: "Portfolio", href: "#portfolio" },
-    { name: "Process", href: "#process" },
-    { name: "Testimonials", href: "#testimonials" },
+    { name: "FAQ", href: "#faq" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
@@ -28,14 +54,21 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-brand-blue rounded-lg flex items-center justify-center">
-            <div className="w-4 h-4 bg-white rounded-xs rotate-45" />
-          </div>
+        <button 
+          onClick={() => setClickCount(prev => prev + 1)}
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+        >
+          {general.siteLogo.startsWith('http') ? (
+            <img src={general.siteLogo} alt={general.siteName} className="w-8 h-8 object-contain" />
+          ) : (
+            <div className="w-8 h-8 bg-brand-blue rounded-lg flex items-center justify-center">
+              <div className="w-4 h-4 bg-white rounded-xs rotate-45" />
+            </div>
+          )}
           <span className="text-xl font-display font-bold tracking-tight">
-            Growth Grid<span className="text-brand-blue"> Media</span>
+            {general.siteName.split(' ')[0]}<span className="text-brand-blue"> {general.siteName.split(' ').slice(1).join(' ')}</span>
           </span>
-        </a>
+        </button>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">

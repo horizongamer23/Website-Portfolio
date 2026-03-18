@@ -1,7 +1,23 @@
 import { motion } from "motion/react";
 import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { STORAGE_KEYS, getStoredData } from "../utils/storage";
+import { DEFAULT_GENERAL } from "../constants/siteDefaults";
 
 export default function Contact() {
+  const [general, setGeneral] = useState(DEFAULT_GENERAL);
+
+  useEffect(() => {
+    const loadData = () => {
+      setGeneral(getStoredData(STORAGE_KEYS.GENERAL, DEFAULT_GENERAL));
+    };
+    loadData();
+    window.addEventListener('storage_update', loadData);
+    return () => window.removeEventListener('storage_update', loadData);
+  }, []);
+
+  const whatsappNumber = general.phone.replace(/[^0-9]/g, '');
+
   return (
     <section id="contact" className="py-16 bg-white">
       <div className="container mx-auto px-6">
@@ -22,7 +38,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-xs text-white/60 font-bold uppercase tracking-widest">Email Us</p>
-                  <p className="font-bold">faujdarmayank902@gmail.com</p>
+                  <p className="font-bold">{general.email}</p>
                 </div>
               </div>
               <div className="flex items-center gap-6">
@@ -31,23 +47,14 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-xs text-white/60 font-bold uppercase tracking-widest">Call Us</p>
-                  <p className="font-bold">+91 73577 58460</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-6">
-                <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/60 font-bold uppercase tracking-widest">Location</p>
-                  <p className="font-bold">Bhartpur, Raj, India</p>
+                  <p className="font-bold">{general.phone}</p>
                 </div>
               </div>
             </div>
 
             <div className="mt-16 pt-12 border-t border-white/10 relative z-10">
               <a
-                href="https://wa.me/917357758460"
+                href={`https://wa.me/${whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-emerald-500 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-900/20"

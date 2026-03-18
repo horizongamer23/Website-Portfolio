@@ -1,7 +1,21 @@
 import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2, Globe, Layout, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, Zap } from "lucide-react";
+import { useState, useEffect } from "react";
+import { STORAGE_KEYS, getStoredData } from "../utils/storage";
+import { DEFAULT_HERO } from "../constants/siteDefaults";
 
 export default function Hero() {
+  const [hero, setHero] = useState(DEFAULT_HERO);
+
+  useEffect(() => {
+    const loadData = () => {
+      setHero(getStoredData(STORAGE_KEYS.HERO, DEFAULT_HERO));
+    };
+    loadData();
+    window.addEventListener('storage_update', loadData);
+    return () => window.removeEventListener('storage_update', loadData);
+  }, []);
+
   return (
     <section className="relative pt-24 pb-12 lg:pt-32 lg:pb-16 overflow-hidden">
       {/* Background Accents */}
@@ -21,10 +35,10 @@ export default function Hero() {
                 Web Development Agency
               </span>
               <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] mb-6">
-                We Build Websites That <span className="gradient-text">Grow Your Business</span>
+                {hero.title}
               </h1>
               <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Growth Grid Media creates high-performing, professional websites designed to build trust, attract customers, and convert visitors into loyal clients.
+                {hero.subtitle}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
@@ -32,7 +46,7 @@ export default function Hero() {
                   href="#contact"
                   className="w-full sm:w-auto bg-brand-dark text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-blue transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand-dark/10"
                 >
-                  Get Your Website
+                  {hero.ctaText}
                   <ArrowRight className="w-5 h-5" />
                 </a>
                 <a
@@ -72,7 +86,7 @@ export default function Hero() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
               <img
-                src="https://picsum.photos/seed/agency-hero/1200/800"
+                src={hero.bgImage}
                 alt="Modern Website Mockup"
                 className="w-full h-auto"
                 referrerPolicy="no-referrer"
@@ -88,18 +102,6 @@ export default function Hero() {
                 <div>
                   <p className="text-xs text-gray-500 font-bold uppercase">Growth Rate</p>
                   <p className="text-lg font-bold">+142%</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute -bottom-6 -left-6 lg:-left-12 glass-card p-4 rounded-xl shadow-xl z-20 hidden sm:block">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-brand-blue/10 rounded-full flex items-center justify-center">
-                  <Globe className="w-5 h-5 text-brand-blue" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500 font-bold uppercase">Global Reach</p>
-                  <p className="text-lg font-bold">24/7 Presence</p>
                 </div>
               </div>
             </div>

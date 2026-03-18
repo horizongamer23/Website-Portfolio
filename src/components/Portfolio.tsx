@@ -1,38 +1,22 @@
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
-
-const projects = [
-  {
-    title: "Hotel Haveli Inn Jodhpur",
-    category: "Hotel & Hospitality",
-    image: "https://picsum.photos/seed/haveli/800/600",
-    result: "Modernized digital presence with a high-performing booking-focused website.",
-    link: "https://hotelhaveliinnjodhpur.com",
-  },
-  {
-    title: "Saffron Bistro",
-    category: "Restaurant",
-    image: "https://picsum.photos/seed/restaurant/800/600",
-    result: "Doubled online reservation volume with a modern, visual menu design.",
-    link: "#",
-  },
-  {
-    title: "Elite Law Group",
-    category: "Professional Services",
-    image: "https://picsum.photos/seed/law/800/600",
-    result: "Established authority and generated 20+ qualified leads in the first month.",
-    link: "#",
-  },
-  {
-    title: "Personal Portfolio",
-    category: "Personal Brand",
-    image: "https://picsum.photos/seed/portfolio/800/600",
-    result: "Created a premium portfolio that showcases high-end web development projects.",
-    link: "#",
-  },
-];
+import { useState, useEffect } from "react";
+import { STORAGE_KEYS, getStoredData } from "../utils/storage";
+import { DEFAULT_PROJECTS } from "../constants/siteDefaults";
 
 export default function Portfolio() {
+  const [projects, setProjects] = useState(DEFAULT_PROJECTS);
+
+  useEffect(() => {
+    const loadData = () => {
+      setProjects(getStoredData(STORAGE_KEYS.PORTFOLIO, DEFAULT_PROJECTS));
+    };
+
+    loadData();
+    window.addEventListener('storage_update', loadData);
+    return () => window.removeEventListener('storage_update', loadData);
+  }, []);
+
   return (
     <section id="portfolio" className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
