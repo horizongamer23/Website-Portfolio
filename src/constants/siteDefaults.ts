@@ -48,7 +48,7 @@ export const DEFAULT_PROJECTS = [
 
 export const DEFAULT_GENERAL = {
   siteName: "Growth Grid Media",
-  siteLogo: "https://ais-dev-voyer7fkczp6g7fn4iv2cs-403949491453.asia-southeast1.run.app",
+  siteLogo: "",
   email: "faujdarmayank902@gmail.com",
   phone: "+91 73577 58460",
   socials: {

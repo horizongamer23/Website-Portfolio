@@ -1,5 +1,5 @@
 export const STORAGE_KEYS = {
-  GENERAL: 'growth_grid_general',
+  GENERAL: 'growth_grid_general_v2',
   HERO: 'growth_grid_hero',
   ABOUT: 'growth_grid_about',
   SERVICES: 'growth_grid_services',
