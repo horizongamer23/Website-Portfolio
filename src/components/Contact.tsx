@@ -6,6 +6,12 @@ import { DEFAULT_GENERAL } from "../constants/siteDefaults";
 
 export default function Contact() {
   const [general, setGeneral] = useState(DEFAULT_GENERAL);
+  const [formData, setFormData] = useState({
+    name: '',
+    business: '',
+    phone: '',
+    message: ''
+  });
 
   useEffect(() => {
     const loadData = () => {
@@ -17,6 +23,22 @@ export default function Contact() {
   }, []);
 
   const whatsappNumber = general.phone.replace(/[^0-9]/g, '');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const text = `Hello! I'm interested in your services.
+
+*Name:* ${formData.name}
+*Business:* ${formData.business}
+*Phone:* ${formData.phone}
+
+*Message:*
+${formData.message}`;
+
+    const encodedText = encodeURIComponent(text);
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
+  };
 
   return (
     <section id="contact" className="py-16 bg-white">
@@ -67,12 +89,15 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="lg:w-3/5 p-12 lg:p-16 bg-white">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700">Full Name</label>
                   <input
                     type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="John Doe"
                     className="w-full px-6 py-4 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
                   />
@@ -81,6 +106,8 @@ export default function Contact() {
                   <label className="text-sm font-bold text-gray-700">Business Name</label>
                   <input
                     type="text"
+                    value={formData.business}
+                    onChange={(e) => setFormData({ ...formData, business: e.target.value })}
                     placeholder="Your Company"
                     className="w-full px-6 py-4 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
                   />
@@ -90,6 +117,9 @@ export default function Contact() {
                 <label className="text-sm font-bold text-gray-700">Phone Number</label>
                 <input
                   type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="+1 (555) 000-0000"
                   className="w-full px-6 py-4 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-brand-blue outline-none transition-all"
                 />
@@ -98,6 +128,9 @@ export default function Contact() {
                 <label className="text-sm font-bold text-gray-700">Message</label>
                 <textarea
                   rows={4}
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell us about your project goals..."
                   className="w-full px-6 py-4 rounded-xl border border-gray-100 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-brand-blue outline-none transition-all resize-none"
                 ></textarea>
