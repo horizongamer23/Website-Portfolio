@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Shield, TrendingUp, Hotel, Utensils, Home, GraduationCap, ShoppingBag, Dumbbell, ArrowRight } from "lucide-react";
+import { Shield, TrendingUp, Target, Rocket, CheckCircle2, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { STORAGE_KEYS, getStoredData } from "../utils/storage";
 import { DEFAULT_ABOUT } from "../constants/siteDefaults";
@@ -17,83 +17,89 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="py-16 bg-gray-50">
+    <section id="about" className="py-24 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          <div className="flex-1">
-            <div className="grid grid-cols-2 gap-6">
-              {[
-                { name: "Hotels & Resorts", icon: Hotel },
-                { name: "Restaurants & Cafes", icon: Utensils },
-                { name: "Real Estate", icon: Home },
-                { name: "Schools & Education", icon: GraduationCap },
-                { name: "E-commerce Stores", icon: ShoppingBag },
-                { name: "Gyms & Fitness", icon: Dumbbell },
-              ].map((industry, i) => (
-                <motion.div
-                  key={industry.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center group hover:border-brand-blue transition-all"
-                >
-                  <div className="w-12 h-12 bg-brand-blue/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-blue group-hover:text-white transition-all">
-                    <industry.icon className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-bold text-sm">{industry.name}</h3>
-                </motion.div>
-              ))}
-            </div>
+        <div className="flex flex-col lg:flex-row items-center gap-20">
+          <div className="flex-1 relative">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="relative z-10"
+            >
+              <div className="aspect-square rounded-[60px] overflow-hidden shadow-2xl border-8 border-white">
+                <img 
+                  src="https://picsum.photos/seed/agency-team/800/800" 
+                  alt="Our Agency Team" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              
+              {/* Floating Badge */}
+              <div className="absolute -bottom-10 -right-10 bg-brand-blue text-white p-8 rounded-[40px] shadow-2xl shadow-brand-blue/30 max-w-[240px]">
+                <Rocket className="w-10 h-10 mb-4" />
+                <p className="text-sm font-medium leading-relaxed">
+                  "{about.mission}"
+                </p>
+              </div>
+            </motion.div>
+            
+            {/* Background Decoration */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-brand-blue/5 rounded-full blur-3xl -z-10" />
           </div>
 
           <div className="flex-1">
-            <span className="text-brand-blue font-bold uppercase tracking-widest text-sm mb-4 block">Our Story</span>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-8 leading-tight">
-              {about.title}
-            </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              {about.description}
-            </p>
-            
-            <div className="grid grid-cols-3 gap-6 mb-10">
-              {about.stats.map((stat, i) => (
-                <div key={i} className="text-center lg:text-left">
-                  <p className="text-3xl font-bold text-brand-blue mb-1">{stat.value}</p>
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-brand-blue font-bold uppercase tracking-widest text-sm mb-4 block">Our Story & Mission</span>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-8 leading-tight">
+                {about.title}
+              </h2>
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                {about.description}
+              </p>
+              
+              <div className="grid grid-cols-3 gap-6 mb-12">
+                {about.stats.map((stat, i) => (
+                  <div key={i} className="p-6 bg-white rounded-3xl shadow-sm border border-gray-100">
+                    <p className="text-2xl font-bold text-brand-blue mb-1">{stat.value}</p>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
 
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-brand-blue" />
+              <div className="space-y-6 mb-10">
+                <div className="flex gap-5">
+                  <div className="flex-shrink-0 w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center">
+                    <Target className="w-6 h-6 text-emerald-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-1">Results-First Approach</h4>
+                    <p className="text-gray-500 text-sm">We don't care about vanity metrics. We care about your ROI and business growth.</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-1">Build Trust & Credibility</h4>
-                  <p className="text-gray-500">We design professional websites that immediately signal quality to your potential customers.</p>
+                <div className="flex gap-5">
+                  <div className="flex-shrink-0 w-12 h-12 bg-brand-blue/10 rounded-2xl flex items-center justify-center">
+                    <Shield className="w-6 h-6 text-brand-blue" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold mb-1">Transparent Partnership</h4>
+                    <p className="text-gray-500 text-sm">No complex jargon. Just clear communication and honest strategies that work.</p>
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-brand-blue" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-1">Drive Real Business Impact</h4>
-                  <p className="text-gray-500">Our focus is on conversions and growth, not just pretty pixels. We build for results.</p>
-                </div>
-              </div>
-            </div>
 
-            <div className="mt-10">
-              <a href="#contact" className="inline-flex items-center gap-2 font-bold text-brand-dark hover:text-brand-blue transition-colors group">
-                Learn more about our approach
-                <motion.span animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
-                  <ArrowRight className="w-5 h-5" />
-                </motion.span>
+              <a href="#contact" className="inline-flex items-center gap-2 bg-brand-dark text-white px-8 py-4 rounded-full font-bold hover:bg-brand-blue transition-all shadow-lg shadow-brand-dark/10">
+                Work With Us
+                <ArrowRight className="w-5 h-5" />
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

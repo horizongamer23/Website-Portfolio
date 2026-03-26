@@ -1,20 +1,24 @@
 import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, Zap, MessageCircle, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { STORAGE_KEYS, getStoredData } from "../utils/storage";
-import { DEFAULT_HERO } from "../constants/siteDefaults";
+import { DEFAULT_HERO, DEFAULT_GENERAL } from "../constants/siteDefaults";
 
 export default function Hero() {
   const [hero, setHero] = useState(DEFAULT_HERO);
+  const [general, setGeneral] = useState(DEFAULT_GENERAL);
 
   useEffect(() => {
     const loadData = () => {
       setHero(getStoredData(STORAGE_KEYS.HERO, DEFAULT_HERO));
+      setGeneral(getStoredData(STORAGE_KEYS.GENERAL, DEFAULT_GENERAL));
     };
     loadData();
     window.addEventListener('storage_update', loadData);
     return () => window.removeEventListener('storage_update', loadData);
   }, []);
+
+  const whatsappNumber = general.phone.replace(/[^0-9]/g, '');
 
   return (
     <section className="relative pt-24 pb-12 lg:pt-32 lg:pb-16 overflow-hidden">
@@ -32,7 +36,7 @@ export default function Hero() {
             >
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-blue/10 text-brand-blue text-xs font-bold uppercase tracking-wider mb-6">
                 <Zap className="w-3.5 h-3.5" />
-                Web Development Agency
+                Digital Marketing Agency
               </span>
               <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] mb-6">
                 {hero.title}
@@ -50,25 +54,28 @@ export default function Hero() {
                   <ArrowRight className="w-5 h-5" />
                 </a>
                 <a
-                  href="#portfolio"
+                  href={`https://wa.me/${whatsappNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full sm:w-auto bg-white border border-gray-200 text-brand-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
                 >
-                  View Our Work
+                  <MessageCircle className="w-5 h-5 text-emerald-500" />
+                  {hero.secondaryCtaText}
                 </a>
               </div>
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-gray-500 font-medium">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                  Conversion Focused
+                  ROI Focused
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                  Mobile Optimized
+                  Data Driven
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                  SEO Ready
+                  Scalable Growth
                 </div>
               </div>
             </motion.div>
@@ -87,7 +94,7 @@ export default function Hero() {
             >
               <img
                 src={hero.bgImage}
-                alt="Modern Website Mockup"
+                alt="Digital Agency Mockup"
                 className="w-full h-auto"
                 referrerPolicy="no-referrer"
               />
@@ -97,11 +104,11 @@ export default function Hero() {
             <div className="absolute -top-6 -right-6 lg:-right-12 glass-card p-4 rounded-xl shadow-xl z-20 hidden sm:block">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-emerald-600" />
+                  <TrendingUp className="w-5 h-5 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 font-bold uppercase">Growth Rate</p>
-                  <p className="text-lg font-bold">+142%</p>
+                  <p className="text-xs text-gray-500 font-bold uppercase">Revenue Growth</p>
+                  <p className="text-lg font-bold">+300%</p>
                 </div>
               </div>
             </div>

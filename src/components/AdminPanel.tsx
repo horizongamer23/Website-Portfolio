@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { X, Plus, Trash2, Save, Image as ImageIcon, Link as LinkIcon, Star, Lock, Globe, Layout, Zap, Search, Phone, Mail, Facebook, Instagram, Twitter, Linkedin, Info, BarChart } from "lucide-react";
+import { X, Plus, Trash2, Save, Image as ImageIcon, Link as LinkIcon, Star, Lock, Globe, Layout, Zap, Search, Phone, Mail, Facebook, Instagram, Twitter, Linkedin, Info, BarChart, Calendar } from "lucide-react";
 import { STORAGE_KEYS, getStoredData, setStoredData } from "../utils/storage";
 import { 
   DEFAULT_GENERAL, 
@@ -8,7 +8,11 @@ import {
   DEFAULT_SERVICES, 
   DEFAULT_TESTIMONIALS, 
   DEFAULT_PROJECTS, 
-  DEFAULT_FAQ 
+  DEFAULT_FAQ,
+  DEFAULT_CASE_STUDIES,
+  DEFAULT_PRICING,
+  DEFAULT_PROCESS,
+  DEFAULT_BLOGS
 } from "../constants/siteDefaults";
 
 interface AdminPanelProps {
@@ -16,7 +20,7 @@ interface AdminPanelProps {
   onClose: () => void;
 }
 
-type Tab = 'general' | 'hero' | 'about' | 'services' | 'portfolio' | 'testimonials' | 'faq';
+type Tab = 'general' | 'hero' | 'about' | 'services' | 'portfolio' | 'case-studies' | 'pricing' | 'process' | 'testimonials' | 'faq' | 'blogs' | 'leads';
 
 export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
   const [activeTab, setActiveTab] = useState<Tab>('general');
@@ -31,6 +35,11 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
   const [testimonials, setTestimonials] = useState(DEFAULT_TESTIMONIALS);
   const [portfolio, setPortfolio] = useState(DEFAULT_PROJECTS);
   const [faq, setFaq] = useState(DEFAULT_FAQ);
+  const [caseStudies, setCaseStudies] = useState(DEFAULT_CASE_STUDIES);
+  const [pricing, setPricing] = useState(DEFAULT_PRICING);
+  const [processSteps, setProcessSteps] = useState(DEFAULT_PROCESS);
+  const [leads, setLeads] = useState<any[]>([]);
+  const [blogs, setBlogs] = useState(DEFAULT_BLOGS);
 
   useEffect(() => {
     if (isOpen) {
@@ -41,6 +50,11 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
       setTestimonials(getStoredData(STORAGE_KEYS.TESTIMONIALS, DEFAULT_TESTIMONIALS));
       setPortfolio(getStoredData(STORAGE_KEYS.PORTFOLIO, DEFAULT_PROJECTS));
       setFaq(getStoredData(STORAGE_KEYS.FAQ, DEFAULT_FAQ));
+      setCaseStudies(getStoredData(STORAGE_KEYS.CASE_STUDIES, DEFAULT_CASE_STUDIES));
+      setPricing(getStoredData(STORAGE_KEYS.PRICING, DEFAULT_PRICING));
+      setProcessSteps(getStoredData(STORAGE_KEYS.PROCESS, DEFAULT_PROCESS));
+      setLeads(getStoredData(STORAGE_KEYS.LEADS, []));
+      setBlogs(getStoredData(STORAGE_KEYS.BLOGS, DEFAULT_BLOGS));
     }
   }, [isOpen]);
 
@@ -67,6 +81,10 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
     setStoredData(STORAGE_KEYS.TESTIMONIALS, testimonials);
     setStoredData(STORAGE_KEYS.PORTFOLIO, portfolio);
     setStoredData(STORAGE_KEYS.FAQ, faq);
+    setStoredData(STORAGE_KEYS.CASE_STUDIES, caseStudies);
+    setStoredData(STORAGE_KEYS.PRICING, pricing);
+    setStoredData(STORAGE_KEYS.PROCESS, processSteps);
+    setStoredData(STORAGE_KEYS.BLOGS, blogs);
     
     window.dispatchEvent(new Event('storage_update'));
     alert('All changes saved successfully!');
@@ -125,13 +143,13 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
             </button>
           </div>
           <div className="flex bg-white p-1 rounded-xl border border-gray-200 overflow-x-auto w-full no-scrollbar">
-            {(['general', 'hero', 'about', 'services', 'portfolio', 'testimonials', 'faq'] as Tab[]).map((tab) => (
+            {(['general', 'hero', 'about', 'services', 'process', 'portfolio', 'case-studies', 'pricing', 'testimonials', 'faq', 'blogs', 'leads'] as Tab[]).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap shrink-0 ${activeTab === tab ? 'bg-brand-blue text-white shadow-md' : 'text-gray-500 hover:bg-gray-50'}`}
               >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                {tab.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
               </button>
             ))}
           </div>
@@ -285,6 +303,15 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
                   rows={4}
                 />
               </div>
+              <div className="space-y-4">
+                <label className="block text-sm font-bold text-gray-700">Mission Statement</label>
+                <textarea
+                  value={about.mission}
+                  onChange={(e) => setAbout({...about, mission: e.target.value})}
+                  className="w-full bg-gray-50 border border-gray-200 p-4 rounded-xl outline-none focus:ring-2 focus:ring-brand-blue"
+                  rows={2}
+                />
+              </div>
               <div className="space-y-6">
                 <h3 className="text-lg font-bold border-b pb-2">Stats</h3>
                 <div className="grid md:grid-cols-3 gap-6">
@@ -320,41 +347,94 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
           {activeTab === 'services' && (
             <div className="space-y-8">
               <div className="flex items-center justify-between">
-                <p className="text-gray-500 text-sm">Manage your service offerings.</p>
+                <p className="text-gray-500 text-sm">Manage your categorized service offerings.</p>
                 <button 
-                  onClick={() => setServices([...services, { title: "New Service", description: "Description here...", icon: "Globe" }])}
+                  onClick={() => setServices([...services, { category: "New Category", items: [] }])}
                   className="flex items-center gap-2 bg-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-emerald-600 transition-all"
                 >
-                  <Plus className="w-4 h-4" /> Add Service
+                  <Plus className="w-4 h-4" /> Add Category
                 </button>
               </div>
-              <div className="grid gap-6">
-                {services.map((service, i) => (
-                  <div key={i} className="bg-gray-50 p-6 rounded-2xl border border-gray-200 space-y-4">
-                    <div className="flex items-center justify-between">
+              <div className="space-y-12">
+                {services.map((cat, catIdx) => (
+                  <div key={catIdx} className="bg-gray-50 p-8 rounded-[32px] border border-gray-200 space-y-6">
+                    <div className="flex items-center justify-between gap-4">
                       <input
-                        value={service.title}
+                        value={cat.category}
                         onChange={(e) => {
                           const newS = [...services];
-                          newS[i].title = e.target.value;
+                          newS[catIdx].category = e.target.value;
                           setServices(newS);
                         }}
-                        className="bg-white border border-gray-200 px-4 py-2 rounded-xl font-bold text-lg focus:ring-2 focus:ring-brand-blue outline-none flex-1 mr-4"
+                        className="bg-white border border-gray-200 px-6 py-3 rounded-xl font-bold text-xl focus:ring-2 focus:ring-brand-blue outline-none flex-1"
                       />
-                      <button onClick={() => setServices(services.filter((_, idx) => idx !== i))} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all">
-                        <Trash2 className="w-5 h-5" />
-                      </button>
+                      <div className="flex gap-2">
+                        <button 
+                          onClick={() => {
+                            const newS = [...services];
+                            newS[catIdx].items.push({ title: "New Service", description: "Description...", icon: "Zap" });
+                            setServices(newS);
+                          }}
+                          className="p-3 bg-brand-blue text-white rounded-xl hover:bg-brand-dark transition-all"
+                          title="Add Service to this Category"
+                        >
+                          <Plus className="w-5 h-5" />
+                        </button>
+                        <button onClick={() => setServices(services.filter((_, idx) => idx !== catIdx))} className="p-3 text-red-500 hover:bg-red-50 rounded-xl transition-all">
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      </div>
                     </div>
-                    <textarea
-                      value={service.description}
-                      onChange={(e) => {
-                        const newS = [...services];
-                        newS[i].description = e.target.value;
-                        setServices(newS);
-                      }}
-                      className="w-full bg-white border border-gray-200 p-4 rounded-xl text-sm focus:ring-2 focus:ring-brand-blue outline-none"
-                      rows={2}
-                    />
+
+                    <div className="grid gap-4">
+                      {cat.items.map((item, itemIdx) => (
+                        <div key={itemIdx} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                          <div className="flex items-center justify-between gap-4">
+                            <input
+                              value={item.title}
+                              onChange={(e) => {
+                                const newS = [...services];
+                                newS[catIdx].items[itemIdx].title = e.target.value;
+                                setServices(newS);
+                              }}
+                              className="bg-gray-50 border border-gray-200 px-4 py-2 rounded-xl font-bold text-sm flex-1"
+                              placeholder="Service Title"
+                            />
+                            <input
+                              value={item.icon}
+                              onChange={(e) => {
+                                const newS = [...services];
+                                newS[catIdx].items[itemIdx].icon = e.target.value;
+                                setServices(newS);
+                              }}
+                              className="bg-gray-50 border border-gray-200 px-4 py-2 rounded-xl text-xs font-mono w-32"
+                              placeholder="Icon Name"
+                            />
+                            <button 
+                              onClick={() => {
+                                const newS = [...services];
+                                newS[catIdx].items = newS[catIdx].items.filter((_, idx) => idx !== itemIdx);
+                                setServices(newS);
+                              }}
+                              className="p-2 text-red-400 hover:text-red-600 transition-colors"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                          <textarea
+                            value={item.description}
+                            onChange={(e) => {
+                              const newS = [...services];
+                              newS[catIdx].items[itemIdx].description = e.target.value;
+                              setServices(newS);
+                            }}
+                            className="w-full bg-gray-50 border border-gray-200 p-4 rounded-xl text-sm outline-none focus:ring-2 focus:ring-brand-blue"
+                            rows={2}
+                            placeholder="Service Description"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -533,46 +613,404 @@ export default function AdminPanel({ isOpen, onClose }: AdminPanelProps) {
             </div>
           )}
 
-          {activeTab === 'faq' && (
+          {activeTab === 'process' && (
             <div className="space-y-8">
               <div className="flex items-center justify-between">
-                <p className="text-gray-500 text-sm">Manage frequently asked questions.</p>
+                <p className="text-gray-500 text-sm">Manage your agency workflow steps.</p>
                 <button 
-                  onClick={() => setFaq([...faq, { question: "New Question?", answer: "Answer here..." }])}
+                  onClick={() => setProcessSteps([...processSteps, { title: "New Step", description: "Description...", icon: "Zap" }])}
                   className="flex items-center gap-2 bg-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-emerald-600 transition-all"
                 >
-                  <Plus className="w-4 h-4" /> Add FAQ
+                  <Plus className="w-4 h-4" /> Add Step
                 </button>
               </div>
               <div className="grid gap-6">
-                {faq.map((item, i) => (
+                {processSteps.map((step, i) => (
                   <div key={i} className="bg-gray-50 p-6 rounded-2xl border border-gray-200 space-y-4">
                     <div className="flex items-center justify-between gap-4">
-                      <input
-                        value={item.question}
-                        onChange={(e) => {
-                          const newF = [...faq];
-                          newF[i].question = e.target.value;
-                          setFaq(newF);
-                        }}
-                        className="bg-white border border-gray-200 px-4 py-2 rounded-xl font-bold text-sm flex-1"
-                      />
-                      <button onClick={() => setFaq(faq.filter((_, idx) => idx !== i))} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all">
+                      <div className="flex-1 grid grid-cols-2 gap-4">
+                        <input
+                          value={step.title}
+                          onChange={(e) => {
+                            const newP = [...processSteps];
+                            newP[i].title = e.target.value;
+                            setProcessSteps(newP);
+                          }}
+                          className="bg-white border border-gray-200 px-4 py-2 rounded-xl font-bold text-sm"
+                          placeholder="Step Title"
+                        />
+                        <input
+                          value={step.icon}
+                          onChange={(e) => {
+                            const newP = [...processSteps];
+                            newP[i].icon = e.target.value;
+                            setProcessSteps(newP);
+                          }}
+                          className="bg-white border border-gray-200 px-4 py-2 rounded-xl text-sm font-mono"
+                          placeholder="Icon Name"
+                        />
+                      </div>
+                      <button onClick={() => setProcessSteps(processSteps.filter((_, idx) => idx !== i))} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all">
                         <Trash2 className="w-5 h-5" />
                       </button>
                     </div>
                     <textarea
-                      value={item.answer}
+                      value={step.description}
                       onChange={(e) => {
-                        const newF = [...faq];
-                        newF[i].answer = e.target.value;
-                        setFaq(newF);
+                        const newP = [...processSteps];
+                        newP[i].description = e.target.value;
+                        setProcessSteps(newP);
                       }}
                       className="w-full bg-white border border-gray-200 p-4 rounded-xl text-sm"
-                      rows={3}
+                      rows={2}
+                      placeholder="Step Description"
                     />
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'case-studies' && (
+            <div className="space-y-8">
+              <div className="flex items-center justify-between">
+                <p className="text-gray-500 text-sm">Manage your success stories.</p>
+                <button 
+                  onClick={() => setCaseStudies([...caseStudies, { title: "New Case Study", client: "Client Name", before: "0", after: "0", metric: "Growth", image: "https://picsum.photos/seed/case/800/600" }])}
+                  className="flex items-center gap-2 bg-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-emerald-600 transition-all"
+                >
+                  <Plus className="w-4 h-4" /> Add Case Study
+                </button>
+              </div>
+              <div className="grid gap-6">
+                {caseStudies.map((study, i) => (
+                  <div key={i} className="bg-gray-50 p-6 rounded-2xl border border-gray-200 space-y-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="w-24 h-16 bg-gray-200 rounded-xl overflow-hidden border-2 border-white shadow-sm shrink-0">
+                        <img src={study.image} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="flex-1 grid grid-cols-2 gap-4">
+                        <input
+                          value={study.title}
+                          onChange={(e) => {
+                            const newC = [...caseStudies];
+                            newC[i].title = e.target.value;
+                            setCaseStudies(newC);
+                          }}
+                          className="bg-white border border-gray-200 px-4 py-2 rounded-xl font-bold text-sm"
+                          placeholder="Title"
+                        />
+                        <input
+                          value={study.client}
+                          onChange={(e) => {
+                            const newC = [...caseStudies];
+                            newC[i].client = e.target.value;
+                            setCaseStudies(newC);
+                          }}
+                          className="bg-white border border-gray-200 px-4 py-2 rounded-xl text-sm"
+                          placeholder="Client Name"
+                        />
+                      </div>
+                      <button onClick={() => setCaseStudies(caseStudies.filter((_, idx) => idx !== i))} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all">
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase ml-2">Before</label>
+                        <input
+                          value={study.before}
+                          onChange={(e) => {
+                            const newC = [...caseStudies];
+                            newC[i].before = e.target.value;
+                            setCaseStudies(newC);
+                          }}
+                          className="w-full bg-white border border-gray-200 px-4 py-2 rounded-xl text-sm"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase ml-2">After</label>
+                        <input
+                          value={study.after}
+                          onChange={(e) => {
+                            const newC = [...caseStudies];
+                            newC[i].after = e.target.value;
+                            setCaseStudies(newC);
+                          }}
+                          className="w-full bg-white border border-gray-200 px-4 py-2 rounded-xl text-sm text-emerald-600 font-bold"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase ml-2">Metric</label>
+                        <input
+                          value={study.metric}
+                          onChange={(e) => {
+                            const newC = [...caseStudies];
+                            newC[i].metric = e.target.value;
+                            setCaseStudies(newC);
+                          }}
+                          className="w-full bg-white border border-gray-200 px-4 py-2 rounded-xl text-sm text-brand-blue font-bold"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-2 rounded-xl">
+                      <ImageIcon className="w-4 h-4 text-gray-400" />
+                      <input
+                        value={study.image}
+                        onChange={(e) => {
+                          const newC = [...caseStudies];
+                          newC[i].image = e.target.value;
+                          setCaseStudies(newC);
+                        }}
+                        className="flex-1 bg-transparent outline-none text-xs"
+                        placeholder="Image URL"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'pricing' && (
+            <div className="space-y-8">
+              <div className="flex items-center justify-between">
+                <p className="text-gray-500 text-sm">Manage your pricing plans.</p>
+                <button 
+                  onClick={() => setPricing([...pricing, { name: "New Plan", price: "$0", period: "/mo", features: ["Feature 1"], recommended: false }])}
+                  className="flex items-center gap-2 bg-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-emerald-600 transition-all"
+                >
+                  <Plus className="w-4 h-4" /> Add Plan
+                </button>
+              </div>
+              <div className="grid gap-8">
+                {pricing.map((plan, i) => (
+                  <div key={i} className={`p-8 rounded-[32px] border-2 transition-all ${plan.recommended ? 'border-brand-blue bg-brand-blue/5' : 'border-gray-100 bg-gray-50'}`}>
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-4 flex-1">
+                        <input
+                          value={plan.name}
+                          onChange={(e) => {
+                            const newP = [...pricing];
+                            newP[i].name = e.target.value;
+                            setPricing(newP);
+                          }}
+                          className="bg-white border border-gray-200 px-4 py-2 rounded-xl font-bold text-lg"
+                        />
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={plan.recommended}
+                            onChange={(e) => {
+                              const newP = pricing.map((p, idx) => ({...p, recommended: idx === i ? e.target.checked : false}));
+                              setPricing(newP);
+                            }}
+                            className="w-4 h-4 rounded border-gray-300 text-brand-blue focus:ring-brand-blue"
+                          />
+                          <span className="text-xs font-bold text-gray-500 uppercase">Recommended</span>
+                        </label>
+                      </div>
+                      <button onClick={() => setPricing(pricing.filter((_, idx) => idx !== i))} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all">
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase ml-2">Price</label>
+                        <input
+                          value={plan.price}
+                          onChange={(e) => {
+                            const newP = [...pricing];
+                            newP[i].price = e.target.value;
+                            setPricing(newP);
+                          }}
+                          className="w-full bg-white border border-gray-200 px-4 py-2 rounded-xl font-bold"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-bold text-gray-400 uppercase ml-2">Period</label>
+                        <input
+                          value={plan.period}
+                          onChange={(e) => {
+                            const newP = [...pricing];
+                            newP[i].period = e.target.value;
+                            setPricing(newP);
+                          }}
+                          className="w-full bg-white border border-gray-200 px-4 py-2 rounded-xl"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-bold text-gray-400 uppercase ml-2">Features (one per line)</label>
+                      <textarea
+                        value={plan.features.join('\n')}
+                        onChange={(e) => {
+                          const newP = [...pricing];
+                          newP[i].features = e.target.value.split('\n').filter(f => f.trim() !== '');
+                          setPricing(newP);
+                        }}
+                        className="w-full bg-white border border-gray-200 p-4 rounded-xl text-sm"
+                        rows={4}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'blogs' && (
+            <div className="space-y-8">
+              <div className="flex items-center justify-between">
+                <p className="text-gray-500 text-sm">Manage your blog posts.</p>
+                <button 
+                  onClick={() => setBlogs([...blogs, { id: Date.now().toString(), title: "New Blog Post", excerpt: "Excerpt...", content: "Full content...", image: "https://picsum.photos/seed/blog/800/600", date: new Date().toISOString().split('T')[0], author: "Growth Grid Team" }])}
+                  className="flex items-center gap-2 bg-emerald-500 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-emerald-600 transition-all"
+                >
+                  <Plus className="w-4 h-4" /> Add Blog Post
+                </button>
+              </div>
+              <div className="grid gap-6">
+                {blogs.map((blog, i) => (
+                  <div key={blog.id} className="bg-gray-50 p-6 rounded-2xl border border-gray-200 space-y-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="w-24 h-16 bg-gray-200 rounded-xl overflow-hidden border-2 border-white shadow-sm shrink-0">
+                        <img src={blog.image} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="flex-1 grid grid-cols-2 gap-4">
+                        <input
+                          value={blog.title}
+                          onChange={(e) => {
+                            const newB = [...blogs];
+                            newB[i].title = e.target.value;
+                            setBlogs(newB);
+                          }}
+                          className="bg-white border border-gray-200 px-4 py-2 rounded-xl font-bold text-sm"
+                          placeholder="Title"
+                        />
+                        <input
+                          value={blog.author}
+                          onChange={(e) => {
+                            const newB = [...blogs];
+                            newB[i].author = e.target.value;
+                            setBlogs(newB);
+                          }}
+                          className="bg-white border border-gray-200 px-4 py-2 rounded-xl text-sm"
+                          placeholder="Author"
+                        />
+                      </div>
+                      <button onClick={() => setBlogs(blogs.filter((_, idx) => idx !== i))} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all">
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                    </div>
+                    <textarea
+                      value={blog.excerpt}
+                      onChange={(e) => {
+                        const newB = [...blogs];
+                        newB[i].excerpt = e.target.value;
+                        setBlogs(newB);
+                      }}
+                      className="w-full bg-white border border-gray-200 p-4 rounded-xl text-sm"
+                      rows={2}
+                      placeholder="Excerpt"
+                    />
+                    <textarea
+                      value={blog.content}
+                      onChange={(e) => {
+                        const newB = [...blogs];
+                        newB[i].content = e.target.value;
+                        setBlogs(newB);
+                      }}
+                      className="w-full bg-white border border-gray-200 p-4 rounded-xl text-sm font-mono"
+                      rows={6}
+                      placeholder="Full Content"
+                    />
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-2 rounded-xl">
+                        <ImageIcon className="w-4 h-4 text-gray-400" />
+                        <input
+                          value={blog.image}
+                          onChange={(e) => {
+                            const newB = [...blogs];
+                            newB[i].image = e.target.value;
+                            setBlogs(newB);
+                          }}
+                          className="flex-1 bg-transparent outline-none text-xs"
+                          placeholder="Image URL"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-2 rounded-xl">
+                        <Calendar className="w-4 h-4 text-gray-400" />
+                        <input
+                          type="date"
+                          value={blog.date}
+                          onChange={(e) => {
+                            const newB = [...blogs];
+                            newB[i].date = e.target.value;
+                            setBlogs(newB);
+                          }}
+                          className="flex-1 bg-transparent outline-none text-xs"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'leads' && (
+            <div className="space-y-8">
+              <div className="flex items-center justify-between">
+                <p className="text-gray-500 text-sm">View and manage your incoming leads.</p>
+                <button 
+                  onClick={() => {
+                    if(confirm('Are you sure you want to clear all leads?')) {
+                      setLeads([]);
+                      setStoredData(STORAGE_KEYS.LEADS, []);
+                    }
+                  }}
+                  className="text-red-500 text-sm font-bold hover:underline"
+                >
+                  Clear All Leads
+                </button>
+              </div>
+              <div className="space-y-4">
+                {leads.length === 0 ? (
+                  <div className="text-center py-20 bg-gray-50 rounded-[32px] border border-dashed border-gray-200">
+                    <Mail className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                    <p className="text-gray-400 font-medium">No leads yet. They will appear here when someone fills the contact form.</p>
+                  </div>
+                ) : (
+                  leads.map((lead, i) => (
+                    <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h4 className="text-lg font-bold text-brand-dark">{lead.name}</h4>
+                          <p className="text-sm text-brand-blue font-medium">{lead.businessName}</p>
+                        </div>
+                        <span className="text-[10px] font-bold text-gray-400 uppercase bg-gray-50 px-3 py-1 rounded-full">
+                          {new Date(lead.timestamp).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Phone className="w-4 h-4 text-gray-400" />
+                          {lead.phone}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Mail className="w-4 h-4 text-gray-400" />
+                          {lead.email || 'N/A'}
+                        </div>
+                      </div>
+                      <div className="bg-gray-50 p-4 rounded-xl text-sm text-gray-600 italic">
+                        "{lead.message}"
+                      </div>
+                    </div>
+                  )).reverse()
+                )}
               </div>
             </div>
           )}

@@ -1,11 +1,16 @@
 export const STORAGE_KEYS = {
-  GENERAL: 'growth_grid_general_v2',
-  HERO: 'growth_grid_hero',
-  ABOUT: 'growth_grid_about',
-  SERVICES: 'growth_grid_services',
-  TESTIMONIALS: 'growth_grid_testimonials',
-  PORTFOLIO: 'growth_grid_portfolio_v2',
-  FAQ: 'growth_grid_faq',
+  GENERAL: 'growth_grid_general_v3',
+  HERO: 'growth_grid_hero_v2',
+  ABOUT: 'growth_grid_about_v2',
+  SERVICES: 'growth_grid_services_v3',
+  TESTIMONIALS: 'growth_grid_testimonials_v2',
+  PORTFOLIO: 'growth_grid_portfolio_v4',
+  FAQ: 'growth_grid_faq_v2',
+  PRICING: 'growth_grid_pricing',
+  PROCESS: 'growth_grid_process',
+  CASE_STUDIES: 'growth_grid_case_studies_v2',
+  LEADS: 'growth_grid_leads',
+  BLOGS: 'growth_grid_blogs',
 };
 
 export const getStoredData = (key: string, defaultValue: any) => {

@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
-import { useState, useEffect } from "react";
-import { STORAGE_KEYS, getStoredData } from "../utils/storage";
+import { useState, useEffect, FormEvent } from "react";
+import { STORAGE_KEYS, getStoredData, setStoredData } from "../utils/storage";
 import { DEFAULT_GENERAL } from "../constants/siteDefaults";
 
 export default function Contact() {
@@ -24,9 +24,18 @@ export default function Contact() {
 
   const whatsappNumber = general.phone.replace(/[^0-9]/g, '');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     
+    // Save Lead to LocalStorage
+    const existingLeads = getStoredData(STORAGE_KEYS.LEADS, []);
+    const newLead = {
+      ...formData,
+      businessName: formData.business, // Map to businessName for consistency in Admin
+      timestamp: new Date().toISOString()
+    };
+    setStoredData(STORAGE_KEYS.LEADS, [...existingLeads, newLead]);
+
     const text = `Hello! I'm interested in your services.
 
 *Name:* ${formData.name}
@@ -38,6 +47,10 @@ ${formData.message}`;
 
     const encodedText = encodeURIComponent(text);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
+    
+    // Reset form
+    setFormData({ name: '', business: '', phone: '', message: '' });
+    alert('Thank you! Your message has been sent and we will contact you soon.');
   };
 
   return (

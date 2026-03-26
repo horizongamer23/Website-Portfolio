@@ -34,41 +34,49 @@ export default function Footer() {
               </span>
             </a>
             <p className="text-gray-500 text-sm leading-relaxed mb-8">
-              Premium web development agency helping local businesses, creators, and hospitality brands grow through high-performing digital solutions.
+              Full-service digital marketing agency helping brands scale through data-driven strategies, high-converting websites, and ROI-focused advertising.
             </p>
             <div className="flex gap-4">
-              <a href={general.socials.twitter} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href={general.socials.facebook} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href={general.socials.instagram} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href={general.socials.linkedin} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
-                <Linkedin className="w-5 h-5" />
-              </a>
+              {general.socials.twitter && (
+                <a href={general.socials.twitter} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                  <Twitter className="w-5 h-5" />
+                </a>
+              )}
+              {general.socials.facebook && (
+                <a href={general.socials.facebook} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                  <Facebook className="w-5 h-5" />
+                </a>
+              )}
+              {general.socials.instagram && (
+                <a href={general.socials.instagram} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              )}
+              {general.socials.linkedin && (
+                <a href={general.socials.linkedin} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+              )}
             </div>
           </div>
 
           <div>
             <h4 className="font-bold mb-6">Services</h4>
             <ul className="space-y-4">
-              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Website Development</a></li>
-              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Website Redesign</a></li>
-              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Landing Pages</a></li>
-              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Business Websites</a></li>
+              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Social Media Marketing</a></li>
+              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Web Development</a></li>
+              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">SEO Optimization</a></li>
+              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Brand Strategy</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-6">Company</h4>
+            <h4 className="font-bold mb-6">Quick Links</h4>
             <ul className="space-y-4">
-              <li><a href="#about" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">About Us</a></li>
-              <li><a href="#portfolio" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Portfolio</a></li>
-              <li><a href="#faq" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">FAQ</a></li>
-              <li><a href="#contact" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Contact</a></li>
+              <li><a href="#about" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Our Story</a></li>
+              <li><a href="#process" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Our Process</a></li>
+              <li><a href="#case-studies" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Case Studies</a></li>
+              <li><a href="#pricing" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Pricing Plans</a></li>
             </ul>
           </div>
 

@@ -24,6 +24,13 @@ export const DEFAULT_TESTIMONIALS = [
 
 export const DEFAULT_PROJECTS = [
   {
+    title: "Skyline Luxury Apartments",
+    category: "Real Estate",
+    image: "https://picsum.photos/seed/apartment/800/600",
+    result: "High-converting property showcase with virtual tour integration.",
+    link: "#",
+  },
+  {
     title: "Jehari Vilas",
     category: "Hotel & Hospitality",
     image: "https://lh3.googleusercontent.com/gps-cs-s/AHVAwepGm3CXM_2ZiX0_7EPTwVQwE1P0rJbJPOhsMoyE9GEhKLDm1zXsuIm-shi5QJWGhrcwViZsiwPtT4v-4HQVlsJKOdcrW0ibXaaT75WnOjApGW8fPd-XpnLqOIBchYS3sl-TZV2IdAnTt-ax=s1340-w720-h1340-rw",
@@ -36,13 +43,6 @@ export const DEFAULT_PROJECTS = [
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSI3F4rG8TLmaPqlWkhgq4-pBXQ2NrKzaM6-JDuPJWMheSPYoOUUYSBJaU&s=10",
     result: "Modernized digital presence with a high-performing booking-focused website.",
     link: "https://hotelhaveliinnjodhpur.com",
-  },
-  {
-    title: "Luxury Resort & Spa",
-    category: "Hospitality",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRyIzwpLH-n0JmYh7BGl1aq85Vh3EC6MUIfpJIzcRiheG48sdpvhmxPFU&s=10",
-    result: "Elevated brand identity and increased direct bookings.",
-    link: "#",
   }
 ];
 
@@ -60,56 +60,133 @@ export const DEFAULT_GENERAL = {
 };
 
 export const DEFAULT_HERO = {
-  title: "We Build Digital Experiences That Drive Growth",
-  subtitle: "Premium web development agency helping local businesses, creators, and hospitality brands grow through high-performing digital solutions.",
-  ctaText: "Get Started",
+  title: "Scale Your Business with Data-Driven Digital Marketing",
+  subtitle: "We don't just build websites; we build growth engines. From high-converting landing pages to viral social media strategies, we help you dominate your market.",
+  ctaText: "Get Free Consultation",
+  secondaryCtaText: "Chat on WhatsApp",
   bgImage: "https://picsum.photos/seed/vibrant/1920/1080?blur=4"
 };
 
 export const DEFAULT_ABOUT = {
-  title: "Crafting Digital Excellence for Indian Businesses",
-  description: "At Growth Grid Media, we understand the unique challenges faced by local businesses in India. Our mission is to bridge the gap between traditional business values and modern digital excellence.",
+  title: "Your Growth is Our Mission",
+  description: "At Growth Grid Media, we believe every business deserves a digital presence that actually works. We started with a simple goal: to help local brands compete in a global digital economy. Today, we're a full-service agency dedicated to results-driven marketing, premium design, and scalable technology.",
+  mission: "To empower 1,000+ businesses with digital tools that drive real-world impact and sustainable growth.",
   stats: [
-    { label: "Projects Completed", value: "150+" },
-    { label: "Happy Clients", value: "80+" },
-    { label: "Years Experience", value: "5+" }
+    { label: "Leads Generated", value: "50k+" },
+    { label: "Ad Spend Managed", value: "$2M+" },
+    { label: "Growth Rate", value: "300%" }
   ]
 };
 
 export const DEFAULT_SERVICES = [
   {
-    title: "Website Development",
-    description: "Custom, high-performance websites built with modern technologies to ensure speed, security, and scalability.",
-    icon: "Globe"
+    category: "Social Media Marketing",
+    items: [
+      { title: "Instagram Growth", description: "Organic strategies to build a loyal community.", icon: "Instagram" },
+      { title: "Content Creation", description: "Viral Reels and high-engagement posts.", icon: "Video" },
+      { title: "Ads Management", description: "ROI-focused Meta and Google ads.", icon: "TrendingUp" }
+    ]
   },
   {
-    title: "Website Redesign",
-    description: "Transform your outdated website into a modern, conversion-focused digital asset that reflects your brand's growth.",
-    icon: "Layout"
+    category: "Web Development",
+    items: [
+      { title: "Business Websites", description: "Professional sites that build trust.", icon: "Globe" },
+      { title: "Landing Pages", description: "Optimized for maximum conversions.", icon: "Zap" },
+      { title: "Booking Systems", description: "Automate your appointments.", icon: "Calendar" }
+    ]
   },
   {
-    title: "Landing Pages",
-    description: "High-converting landing pages designed to turn visitors into customers for your specific marketing campaigns.",
-    icon: "Zap"
-  },
-  {
-    title: "SEO Optimization",
-    description: "Strategic search engine optimization to help your business rank higher and attract more organic traffic.",
-    icon: "Search"
+    category: "Branding & Design",
+    items: [
+      { title: "Logo Design", description: "Memorable visual identities.", icon: "Palette" },
+      { title: "Thumbnails", description: "High-CTR designs for YouTube/Socials.", icon: "Image" },
+      { title: "Social Creatives", description: "Brand-consistent social assets.", icon: "Layers" }
+    ]
   }
+];
+
+export const DEFAULT_CASE_STUDIES = [
+  {
+    title: "Real Estate Lead Gen",
+    client: "Skyline Realty",
+    before: "2 leads/month",
+    after: "45 leads/month",
+    metric: "22x Growth",
+    image: "https://picsum.photos/seed/realestate1/800/600"
+  },
+  {
+    title: "Local Restaurant Lead Gen",
+    client: "Spice Garden",
+    before: "5 bookings/week",
+    after: "45 bookings/week",
+    metric: "9x Leads",
+    image: "https://picsum.photos/seed/growth2/800/600"
+  }
+];
+
+export const DEFAULT_PRICING = [
+  {
+    name: "Starter",
+    price: "₹15,000",
+    period: "/month",
+    features: ["Basic Social Media", "1 Landing Page", "Monthly Report", "Email Support"],
+    recommended: false
+  },
+  {
+    name: "Growth",
+    price: "₹35,000",
+    period: "/month",
+    features: ["Advanced SMM", "Full Website", "Ads Management", "Priority Support", "SEO Setup"],
+    recommended: true
+  },
+  {
+    name: "Premium",
+    price: "₹75,000",
+    period: "/month",
+    features: ["Full Digital Strategy", "E-commerce Setup", "Content Production", "Dedicated Manager", "24/7 Support"],
+    recommended: false
+  }
+];
+
+export const DEFAULT_PROCESS = [
+  { title: "Discovery", description: "We learn about your business goals and audience." },
+  { title: "Strategy", description: "We create a custom roadmap for your growth." },
+  { title: "Execution", description: "Our experts build and launch your campaigns." },
+  { title: "Optimization", description: "We analyze data and scale what works." }
 ];
 
 export const DEFAULT_FAQ = [
   {
-    question: "How long does it take to build a website?",
-    answer: "Typically, a standard business website takes 2-4 weeks. More complex projects like e-commerce platforms or custom applications can take 6-10 weeks depending on the features and design requirements."
+    question: "How long does it take to see results?",
+    answer: "Social media and ads often show results in 2-4 weeks, while SEO typically takes 3-6 months for significant ranking improvements."
   },
   {
-    question: "Do you provide SEO services with web development?",
-    answer: "Yes, all our websites are built with SEO best practices from the ground up. We also offer dedicated SEO packages for ongoing growth."
+    question: "Do you offer custom packages?",
+    answer: "Absolutely! We can tailor our services to fit your specific business needs and budget."
   },
   {
-    question: "How can you help with Local SEO in India?",
-    answer: "We specialize in local SEO strategies tailored for the Indian market. This includes Google Business Profile optimization and local citation building."
+    question: "How do we track progress?",
+    answer: "We provide detailed monthly reports and real-time dashboards to track your KPIs and growth."
+  }
+];
+
+export const DEFAULT_BLOGS = [
+  {
+    id: "1",
+    title: "5 Strategies to Scale Your Local Business in 2024",
+    excerpt: "Discover the most effective digital marketing strategies for local businesses to dominate their market.",
+    content: "Full content here...",
+    image: "https://picsum.photos/seed/blog1/800/600",
+    date: "2024-03-20",
+    author: "Growth Grid Team"
+  },
+  {
+    id: "2",
+    title: "Why Real Estate Agencies Need a High-Converting Website",
+    excerpt: "In the digital age, your website is your most important salesperson. Learn how to optimize it.",
+    content: "Full content here...",
+    image: "https://picsum.photos/seed/blog2/800/600",
+    date: "2024-03-15",
+    author: "Growth Grid Team"
   }
 ];

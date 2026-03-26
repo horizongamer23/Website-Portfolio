@@ -41,10 +41,14 @@ export default function Navbar({ onLogoClick }: NavbarProps) {
   }, []);
 
   const navLinks = [
+    { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
+    { name: "Process", href: "#process" },
     { name: "Portfolio", href: "#portfolio" },
+    { name: "Results", href: "#case-studies" },
+    { name: "Pricing", href: "#pricing" },
+    { name: "Blog", href: "#blog" },
     { name: "FAQ", href: "#faq" },
-    { name: "Contact", href: "#contact" },
   ];
 
   return (
