@@ -52,7 +52,7 @@ export default function Testimonials() {
               <div className="flex items-center gap-4">
                 <img
                   src={testimonial.image}
-                  alt={testimonial.name}
+                  alt={`Testimonial from ${testimonial.name}, ${testimonial.role}`}
                   className="w-12 h-12 rounded-full object-cover"
                   referrerPolicy="no-referrer"
                 />

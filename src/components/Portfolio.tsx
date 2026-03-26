@@ -33,6 +33,7 @@ export default function Portfolio() {
           <a
             href="#contact"
             className="inline-flex items-center gap-2 bg-brand-dark text-white px-8 py-4 rounded-full font-bold hover:bg-brand-blue transition-all"
+            title="Start your digital project with Growth Grid Media"
           >
             Start Your Project
           </a>
@@ -48,7 +49,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="group relative bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all"
             >
-              <a href={project.link} target={project.link !== "#" ? "_blank" : undefined} rel="noopener noreferrer">
+              <a href={project.link} target={project.link !== "#" ? "_blank" : undefined} rel="noopener noreferrer" title={`View ${project.title} live project`}>
                 <div className="aspect-video overflow-hidden relative">
                   <img
                     src={project.image}

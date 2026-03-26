@@ -61,6 +61,7 @@ export default function Navbar({ onLogoClick }: NavbarProps) {
         <button 
           onClick={() => setClickCount(prev => prev + 1)}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          title="Growth Grid Media - Home"
         >
           {general.siteLogo.startsWith('http') ? (
             <img src={general.siteLogo} alt={general.siteName} className="w-8 h-8 object-contain" />
@@ -81,6 +82,7 @@ export default function Navbar({ onLogoClick }: NavbarProps) {
               key={link.name}
               href={link.href}
               className="text-sm font-medium text-gray-600 hover:text-brand-blue transition-colors"
+              title={`Go to ${link.name} section`}
             >
               {link.name}
             </a>
@@ -88,6 +90,7 @@ export default function Navbar({ onLogoClick }: NavbarProps) {
           <a
             href="#contact"
             className="bg-brand-dark text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-blue transition-all flex items-center gap-2 group"
+            title="Get started with Growth Grid Media"
           >
             Get Started
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

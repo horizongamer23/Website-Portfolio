@@ -38,6 +38,7 @@ export default function FAQ() {
               <a
                 href="#contact"
                 className="inline-flex items-center gap-2 text-brand-blue font-bold hover:gap-3 transition-all"
+                title="Contact Growth Grid Media for any other questions"
               >
                 Get in touch <Plus className="w-4 h-4" />
               </a>

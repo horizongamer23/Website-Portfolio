@@ -75,6 +75,7 @@ export default function Pricing() {
                     ? 'bg-brand-blue text-white hover:bg-white hover:text-brand-dark'
                     : 'bg-gray-50 text-brand-dark hover:bg-brand-blue hover:text-white'
                 }`}
+                title={`Choose the ${plan.name} plan for your business`}
               >
                 Get Started Now
                 <ArrowRight className="w-4 h-4" />

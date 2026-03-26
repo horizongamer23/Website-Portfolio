@@ -31,7 +31,7 @@ export default function About() {
               <div className="aspect-square rounded-[60px] overflow-hidden shadow-2xl border-8 border-white">
                 <img 
                   src="https://picsum.photos/seed/agency-team/800/800" 
-                  alt="Our Agency Team" 
+                  alt="Growth Grid Media digital marketing team at work" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
@@ -64,6 +64,14 @@ export default function About() {
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 {about.description}
               </p>
+              <div className="prose prose-lg text-gray-600 max-w-none mb-10">
+                <p>
+                  Growth Grid Media is more than just a marketing agency; we're your strategic partner in the digital world. Founded with a vision to empower businesses through innovative technology and creative marketing, we've helped dozens of clients achieve their growth targets and establish a dominant online presence.
+                </p>
+                <p>
+                  Our team brings together experts in social media marketing, web development, SEO, and brand strategy. We believe that every business has a unique story to tell, and our mission is to help you tell that story in a way that resonates with your audience and drives real, measurable results.
+                </p>
+              </div>
               
               <div className="grid grid-cols-3 gap-6 mb-12">
                 {about.stats.map((stat, i) => (
@@ -95,7 +103,7 @@ export default function About() {
                 </div>
               </div>
 
-              <a href="#contact" className="inline-flex items-center gap-2 bg-brand-dark text-white px-8 py-4 rounded-full font-bold hover:bg-brand-blue transition-all shadow-lg shadow-brand-dark/10">
+              <a href="#contact" className="inline-flex items-center gap-2 bg-brand-dark text-white px-8 py-4 rounded-full font-bold hover:bg-brand-blue transition-all shadow-lg shadow-brand-dark/10" title="Contact Growth Grid Media to start your growth journey">
                 Work With Us
                 <ArrowRight className="w-5 h-5" />
               </a>

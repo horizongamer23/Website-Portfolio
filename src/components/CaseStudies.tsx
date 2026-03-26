@@ -66,7 +66,7 @@ export default function CaseStudies() {
                     <p className="text-sm font-bold text-brand-blue">{study.metric}</p>
                   </div>
                 </div>
-                <a href="#contact" className="inline-flex items-center gap-2 font-bold text-brand-dark hover:text-brand-blue transition-colors">
+                <a href="#contact" className="inline-flex items-center gap-2 font-bold text-brand-dark hover:text-brand-blue transition-colors" title={`Read full case study for ${study.client}`}>
                   View Full Case Study
                   <ArrowRight className="w-5 h-5" />
                 </a>

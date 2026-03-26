@@ -49,6 +49,7 @@ export default function Hero() {
                 <a
                   href="#contact"
                   className="w-full sm:w-auto bg-brand-dark text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-blue transition-all flex items-center justify-center gap-2 shadow-lg shadow-brand-dark/10"
+                  title="Get a free consultation for your business growth"
                 >
                   {hero.ctaText}
                   <ArrowRight className="w-5 h-5" />
@@ -58,6 +59,7 @@ export default function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto bg-white border border-gray-200 text-brand-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+                  title="Chat with us on WhatsApp for quick support"
                 >
                   <MessageCircle className="w-5 h-5 text-emerald-500" />
                   {hero.secondaryCtaText}

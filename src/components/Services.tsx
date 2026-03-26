@@ -44,9 +44,17 @@ export default function Services() {
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             Full-Stack <span className="gradient-text">Digital Solutions</span>
           </h2>
-          <p className="text-lg text-gray-600">
-            We combine marketing psychology with high-end technology to deliver results that actually impact your bottom line.
+          <p className="text-lg text-gray-600 mb-8">
+            We combine marketing psychology with high-end technology to deliver results that actually impact your bottom line. Our approach is data-driven, ensuring that every campaign we run and every website we build is optimized for maximum conversion and business growth.
           </p>
+          <div className="prose prose-lg text-gray-500 max-w-none mb-12">
+            <p>
+              In today's digital landscape, simply having an online presence isn't enough. You need a strategic partner who understands the nuances of social media algorithms, search engine optimization, and user experience design. At Growth Grid Media, we specialize in creating cohesive digital ecosystems that work together to attract, engage, and convert your target audience.
+            </p>
+            <p>
+              Whether you're looking to dominate local search results in Jodhpur, launch a high-performing e-commerce platform, or build a powerful brand identity that resonates with your customers, our team of experts is here to guide you. We don't just provide services; we provide solutions tailored to your unique business goals.
+            </p>
+          </div>
         </div>
 
         <div className="space-y-20">
@@ -75,7 +83,7 @@ export default function Services() {
                       <p className="text-gray-500 text-sm leading-relaxed mb-6">
                         {item.description}
                       </p>
-                      <a href="#contact" className="inline-flex items-center gap-2 text-sm font-bold text-brand-dark group-hover:text-brand-blue transition-colors">
+                      <a href="#contact" className="inline-flex items-center gap-2 text-sm font-bold text-brand-dark group-hover:text-brand-blue transition-colors" title={`Learn more about our ${item.title} services`}>
                         Learn More
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </a>

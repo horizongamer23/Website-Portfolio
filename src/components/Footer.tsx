@@ -38,22 +38,22 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               {general.socials.twitter && (
-                <a href={general.socials.twitter} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                <a href={general.socials.twitter} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all" title="Follow Growth Grid Media on Twitter">
                   <Twitter className="w-5 h-5" />
                 </a>
               )}
               {general.socials.facebook && (
-                <a href={general.socials.facebook} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                <a href={general.socials.facebook} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all" title="Follow Growth Grid Media on Facebook">
                   <Facebook className="w-5 h-5" />
                 </a>
               )}
               {general.socials.instagram && (
-                <a href={general.socials.instagram} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                <a href={general.socials.instagram} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all" title="Follow Growth Grid Media on Instagram">
                   <Instagram className="w-5 h-5" />
                 </a>
               )}
               {general.socials.linkedin && (
-                <a href={general.socials.linkedin} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                <a href={general.socials.linkedin} className="w-10 h-10 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-all" title="Connect with Growth Grid Media on LinkedIn">
                   <Linkedin className="w-5 h-5" />
                 </a>
               )}
@@ -63,10 +63,10 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-6">Services</h4>
             <ul className="space-y-4">
-              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Social Media Marketing</a></li>
-              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Web Development</a></li>
-              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">SEO Optimization</a></li>
-              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors">Brand Strategy</a></li>
+              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors" title="View our Social Media Marketing services">Social Media Marketing</a></li>
+              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors" title="View our Web Development services">Web Development</a></li>
+              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors" title="View our SEO Optimization services">SEO Optimization</a></li>
+              <li><a href="#services" className="text-sm text-gray-500 hover:text-brand-blue transition-colors" title="View our Brand Strategy services">Brand Strategy</a></li>
             </ul>
           </div>
 

@@ -93,6 +93,7 @@ ${formData.message}`;
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-emerald-500 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-900/20"
+                title="Chat with Growth Grid Media on WhatsApp"
               >
                 <MessageCircle className="w-6 h-6" />
                 Chat on WhatsApp
@@ -151,6 +152,7 @@ ${formData.message}`;
               <button
                 type="submit"
                 className="w-full bg-brand-dark text-white py-5 rounded-xl font-bold text-lg hover:bg-brand-blue transition-all flex items-center justify-center gap-3 shadow-xl shadow-brand-dark/10"
+                title="Send your message to Growth Grid Media"
               >
                 Send Message
                 <Send className="w-5 h-5" />
